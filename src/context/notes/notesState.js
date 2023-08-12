@@ -15,7 +15,7 @@ const NoteState = (props) => {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        'auth-token':localStorage.getItem('token')
+        'auth-token': localStorage.getItem('token')
       },
     });
     const json=await response.json();
@@ -42,7 +42,7 @@ const NoteState = (props) => {
   const editNotes = async(id, title, description, tag) => {
      //API call
      const response = await fetch(`${host}/api/notes/updatenotes/${id}`, {
-      method: "PUT", // *GET, POST, PUT, DELETE, etc.
+      method: "PUT", 
       headers: {
         "Content-Type": "application/json",
         'auth-token':localStorage.getItem('token')
@@ -52,7 +52,7 @@ const NoteState = (props) => {
     const json= await response.json(); // parses JSON response into native JavaScript objects
     console.log(json);
     //Logic to edit the client
-    let currentnotes=JSON.parse(JSON.stringify(notes));
+     let currentnotes=JSON.parse(JSON.stringify(notes));
      for (let index = 0; index < currentnotes.length; index++) {                                     
       if(currentnotes[index]._id===id){
         currentnotes[index].description=description;
@@ -73,7 +73,7 @@ const NoteState = (props) => {
         'auth-token':localStorage.getItem('token')
       },
     });
-    const json=response.json(); 
+    const json=await response.json(); 
 
     const newNotes = notes.filter((note) => { return (note._id !== id) });
     setnotes(newNotes);

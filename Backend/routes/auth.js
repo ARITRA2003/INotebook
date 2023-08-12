@@ -39,7 +39,7 @@ router.post('/createuser',
             const salt=await bcrypt.genSalt(10);
             const secPassword= await bcrypt.hash(password,salt);
             //If User does not exist,create in DataBase
-            user = User.create({
+            user =await User.create({
                 name:name,
                 email:email,
                 password:secPassword,
@@ -50,9 +50,10 @@ router.post('/createuser',
                 }
             }
             const authid=jwt.sign(data,SECRET)
-            res.json({
+            return res.json({
                 sucess:true,
-                authid});
+                authid
+            });
         }
         catch (error) {
             console.error(error);
@@ -84,12 +85,13 @@ async (req, res) => {
         res.status(400).json({
             error:"Please put a valid credentials"
         });
+        return;
         }
         const isMatch=await bcrypt.compare(password,user.password);
         if(!isMatch){
-        res.status(400).json({
-            error:"Please put a valid credentials"
-        });
+            return res.status(400).json({
+                error:"Please put a valid credentials"
+            });
         }
         const data={
             user:{
@@ -99,7 +101,8 @@ async (req, res) => {
         const authid=jwt.sign(data,SECRET)
         res.json({
             sucess:true,
-            authid});
+            authid
+        });
     }
     catch(err){
         console.error(err);

@@ -40,7 +40,8 @@ router.post('/addnotes', fetchuser,
             }
             const {tag,title,description}=req.body;
             // creating new note for user
-            //having id req.user.id
+            // having id req.user.id
+            // console.log(req.user._id);
             const note =new UserNotes({
                 user:req.user.id,
                 title,
