@@ -45,10 +45,6 @@ const Signup = (props) => {
             <label htmlFor="password" className="form-label">Password</label>
             <input type="password" className="form-control" id="password" value={credentials.password} name='password' onChange={onChange} minLength={8} required />
           </div>
-          <div className="mb-3">
-            <label htmlFor="cpassword" className="form-label">Confirm Password</label>
-            <input type="password" className="form-control" id="cpassword" value={credentials.cpassword} name='cpassword' onChange={onChange} minLength={8} required />
-          </div>
           <button type="submit" className="btn btn-primary" >Sign Up</button>
         </form>
       </div>
